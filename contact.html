@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byte Warden | Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="prabal.css">
+    <style>
+        .page-header { text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); }
+        .page-header h1 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 1rem; }
+        .page-content { max-width: 600px; margin: 4rem auto; padding: 0 1rem; color: var(--text-muted); }
+        
+        .contact-form { display: flex; flex-direction: column; gap: 1.5rem; background: var(--bg-card); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { color: var(--text-main); font-weight: 500; }
+        .form-group input, .form-group textarea { 
+            padding: 0.75rem 1rem; 
+            border-radius: 8px; 
+            background: var(--bg-dark); 
+            border: 1px solid var(--border-color); 
+            color: var(--text-main); 
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group textarea:focus { 
+            outline: none; 
+            border-color: var(--accent-blue); 
+        }
+        .contact-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .contact-btn:hover { background-color: var(--accent-blue-hover); }
+        
+        .support-info { text-align: center; margin-top: 3rem; }
+        .support-info a { color: var(--accent-blue); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="prabal.html" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-auth">
+                <a href="prabal.html" class="login">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-header">
+            <h1>Contact Support</h1>
+            <p>We're here to help you secure your digital life.</p>
+        </div>
+        
+        <div class="page-content">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Your message has been sent successfully. We will reply to your email shortly.'); this.reset();">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <input type="text" id="topic" required placeholder="General Inquiry, Technical Support, etc.">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required placeholder="How can we help you today?"></textarea>
+                </div>
+                <button type="submit" class="contact-btn">Send Message</button>
+            </form>
+
+            <div class="support-info">
+                <p>Urgent inquiry? Email us directly at <a href="mailto:support@bytewarden.com">support@bytewarden.com</a></p>
+                <p><small>(Note: We can never recover your master password or decrypt your vault for you.)</small></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="brand">
+                    <span>Byte Warden</span>
+                </div>
+                <p>&copy; 2026 Byte Warden Inc.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

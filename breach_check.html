@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have I Been Pwned? | Byte Warden</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="prabal.css">
+    <style>
+        :root {
+            --hibp-red: #ba2525;
+            --hibp-red-dark: #8c1c1c;
+            --hibp-green: #1d9d74;
+            --hibp-green-dark: #157556;
+            --hibp-bg: #f4f4f4;
+            --hibp-text: #222222;
+        }
+        body {
+            background-color: var(--hibp-bg);
+            color: var(--hibp-text);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #000;
+            border-bottom: none;
+        }
+        .navbar a.brand {
+            color: #fff;
+        }
+        .navbar .nav-links a {
+            color: #ccc;
+        }
+        
+        .pwned-hero {
+            background-color: #fff;
+            padding: 100px 20px 60px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.4s ease;
+        }
+        .pwned-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .pwned-hero p.subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .search-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+            padding: 0 20px;
+        }
+        .search-form input {
+            flex: 1;
+            padding: 20px 24px;
+            font-size: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-form input:focus {
+            border-color: #333;
+        }
+        .search-form button {
+            padding: 20px 40px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .search-form button:hover {
+            background-color: #111;
+        }
+        
+        /* State Classes for Hero Banner */
+        .pwned-hero.safe {
+            background-color: var(--hibp-green);
+        }
+        .pwned-hero.safe h1, .pwned-hero.safe p.subtitle {
+            color: #fff;
+        }
+        .pwned-hero.safe .search-form input {
+            border-color: var(--hibp-green-dark);
+        }
+        .pwned-hero.safe .search-form button {
+            background-color: var(--hibp-green-dark);
+        }
+        
+        .pwned-hero.breached {
+            background-color: var(--hibp-red);
+        }
+        .pwned-hero.breached h1, .pwned-hero.breached p.subtitle {
+            color: #fff;
+        }
+        .pwned-hero.breached .search-form input {
+            border-color: var(--hibp-red-dark);
+        }
+        .pwned-hero.breached .search-form button {
+            background-color: var(--hibp-red-dark);
+        }
+
+        .results-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: none;
+        }
+        
+        .breach-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .breach-logo {
+            width: 80px;
+            height: 80px;
+            background-color: #eee;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #999;
+            flex-shrink: 0;
+        }
+        .breach-info h3 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+            color: var(--hibp-red);
+        }
+        .breach-info p {
+            margin: 0 0 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .breach-meta {
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 15px;
+        }
+        
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .info-text {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="prabal.html" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-links">
+                <a href="prabal.html">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pwned-hero" id="hero-banner">
+        <h1 id="hero-title">Have I Been Pwned?</h1>
+        <p class="subtitle" id="hero-subtitle">Check if your email address is in a data breach</p>
+        
+        <div class="search-form">
+            <input type="email" id="email-input" placeholder="email address" autocomplete="off" spellcheck="false">
+            <button id="check-btn">pwned?</button>
+        </div>
+        
+        <div id="loading">Searching across databases...</div>
+    </div>
+
+    <div class="results-container" id="results-container">
+        <!-- Breach details go here -->
+    </div>
+    
+    <div class="info-text" id="info-text">
+        <p>This tool queries public databases to find occurrences of your email in aggregated data breaches.</p>
+    </div>
+
+    <script>
+        document.getElementById('check-btn').addEventListener('click', checkBreach);
+        document.getElementById('email-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkBreach();
+        });
+
+        async function checkBreach() {
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value.trim();
+            const heroBanner = document.getElementById('hero-banner');
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            const resultContainer = document.getElementById('results-container');
+            const loading = document.getElementById('loading');
+            const infoText = document.getElementById('info-text');
+
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Reset UI
+            heroBanner.className = 'pwned-hero';
+            heroTitle.textContent = 'Have I Been Pwned?';
+            heroSubtitle.textContent = 'Check if your email address is in a data breach';
+            resultContainer.style.display = 'none';
+            resultContainer.innerHTML = '';
+            infoText.style.display = 'none';
+            loading.style.display = 'block';
+
+            try {
+                // We use XposedOrNot API
+                const url = `https://api.xposedornot.com/v1/check-email/${encodeURIComponent(email)}`;
+                const response = await fetch(url);
+                
+                loading.style.display = 'none';
+
+                if (response.status === 404) {
+                    // Safe
+                    heroBanner.className = 'pwned-hero safe';
+                    heroTitle.textContent = 'Good news — no pwnage found!';
+                    heroSubtitle.textContent = 'No breached accounts and no pastes';
+                } else if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.breaches && data.breaches[0] && data.breaches[0].length > 0) {
+                        heroBanner.className = 'pwned-hero breached';
+                        heroTitle.textContent = 'Oh no — pwned!';
+                        heroSubtitle.textContent = `Pwned in ${data.breaches[0].length} data breaches`;
+                        
+                        let breachesHtml = '<h2>Breaches you were pwned in</h2>';
+                        
+                        // We will format the breach names into cards
+                        data.breaches[0].forEach(breachName => {
+                            const firstLetter = breachName.charAt(0).toUpperCase();
+                            breachesHtml += `
+                                <div class="breach-card">
+                                    <div class="breach-logo">${firstLetter}</div>
+                                    <div class="breach-info">
+                                        <h3>${breachName}</h3>
+                                        <p>In this breach, extensive user data might have been exposed including email addresses, passwords, and personal information. We recommend changing your password immediately if you reuse it.</p>
+                                        <div class="breach-meta">Compromised data: Email addresses, Passwords, Names</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        resultContainer.innerHTML = breachesHtml;
+                        resultContainer.style.display = 'block';
+                    } else {
+                        // Edge case where response is 200 but breaches array is empty
+                        heroBanner.className = 'pwned-hero safe';
+                        heroTitle.textContent = 'Good news — no pwnage found!';
+                        heroSubtitle.textContent = 'No breached accounts and no pastes';
+                    }
+                } else {
+                    throw new Error('API Response not ok');
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                heroBanner.className = 'pwned-hero';
+                heroTitle.textContent = 'Service Error';
+                heroSubtitle.textContent = 'Unable to connect to the breach database. Please try again later.';
+                console.error('Fetch error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

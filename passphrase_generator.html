@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passphrase & Memory Aid | Byte Warden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="prabal.css">
+    <style>
+        .generator-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .header-section p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .main-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .passphrase-display-box {
+            background: #0f172a;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+
+        #passphrase-output {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            word-break: break-all;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-color);
+        }
+
+        .memory-aid-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.02) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-left: 4px solid var(--success-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .memory-aid-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--success-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        #memory-story {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            font-style: italic;
+        }
+
+        .highlight-word {
+            font-weight: 700;
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-style: normal;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .control-group select, .control-group input[type="number"] {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .control-group select:focus, .control-group input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]:checked + .toggle-switch {
+            background: var(--primary-color);
+        }
+
+        input[type="checkbox"]:checked + .toggle-switch::after {
+            transform: translateX(20px);
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .entropy-box {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .entropy-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .entropy-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--warning-color);
+        }
+
+        .generate-btn {
+            padding: 16px 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Animation for generation */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); border-color: var(--primary-color); }
+            50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.6); border-color: #60a5fa; }
+            100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); border-color: var(--primary-color); }
+        }
+
+        .generating {
+            animation: pulse-glow 0.8s ease-out;
+        }
+
+        .generating #passphrase-output {
+            opacity: 0.5;
+            filter: blur(2px);
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="prabal.html" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-links">
+                <a href="prabal.html">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="generator-container">
+        <div class="header-section">
+            <h1 class="highlight">Passphrase & Memory Aid</h1>
+            <p>Generate secure diceware-style passphrases tied to vivid mental images. It's much easier for human brains to remember a weird story than a string of random characters.</p>
+        </div>
+
+        <div class="main-card">
+            
+            <div class="passphrase-display-box" id="display-box">
+                <button class="copy-btn" id="copy-btn">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy
+                </button>
+                <p id="passphrase-output">loading-words-now</p>
+            </div>
+
+            <div class="memory-aid-section">
+                <div class="memory-aid-header">
+                    <span style="font-size: 24px;">🧠</span> 
+                    <span>Your Memory Palace Core Image</span>
+                </div>
+                <p id="memory-story">Picture a <span class="highlight-word">loading</span> bar wrapping around a dictionary of <span class="highlight-word">words</span> right <span class="highlight-word">now</span>.</p>
+            </div>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label for="word-count">Number of Words</label>
+                    <input type="number" id="word-count" value="4" min="3" max="8">
+                </div>
+                <div class="control-group">
+                    <label for="separator">Separator</label>
+                    <select id="separator">
+                        <option value="-">Hyphen (-)</option>
+                        <option value=" ">Space ( )</option>
+                        <option value="_">Underscore (_)</option>
+                        <option value=".">Period (.)</option>
+                        <option value="">None (CamelCase style)</option>
+                    </select>
+                </div>
+                <div class="control-group" style="justify-content: center;">
+                    <label class="toggle-container">
+                        <input type="checkbox" id="add-numbers" checked>
+                        <div class="toggle-switch"></div>
+                        <span style="color: white; font-weight: 500;">Add Random Number</span>
+                    </label>
+                </div>
+                <div class="control-group" style="justify-content: center;">
+                    <label class="toggle-container">
+                        <input type="checkbox" id="capitalize">
+                        <div class="toggle-switch"></div>
+                        <span style="color: white; font-weight: 500;">Capitalize First Letters</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <div class="entropy-box">
+                    <span class="entropy-title">Mathematical Entropy</span>
+                    <span class="entropy-value" id="entropy-display">~60 bits (Strong)</span>
+                </div>
+                <button class="btn btn-primary generate-btn" id="generate-btn">
+                    Generate New Memory
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="brand">Byte Warden</div>
+                <p>&copy; 2025 Byte Warden Inc.</p>
+            </div>
+            <div class="footer-links">
+                <span class="highlight">Memory Engineering Division</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="passphrase_generator.js"></script>
+</body>
+</html>

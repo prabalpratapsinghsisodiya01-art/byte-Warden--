@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password UX Analyzer | Byte Warden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="prabal.css">
+    <style>
+        .analyzer-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .header-section p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .input-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 20px 24px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .search-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .search-form button {
+            padding: 0 40px;
+            font-size: 18px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Results Area */
+        #results-dashboard {
+            display: none;
+        }
+
+        .score-card {
+            background: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(30,41,59,0.9));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .grade-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            font-weight: 800;
+            background: #0f172a;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            margin: 0 auto;
+        }
+
+        .grade-circle.A { color: var(--success-color); border: 4px solid var(--success-color); box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); }
+        .grade-circle.B { color: #3b82f6; border: 4px solid #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); }
+        .grade-circle.C { color: var(--warning-color); border: 4px solid var(--warning-color); box-shadow: 0 0 30px rgba(245, 158, 11, 0.3); }
+        .grade-circle.D { color: #f97316; border: 4px solid #f97316; box-shadow: 0 0 30px rgba(249, 115, 22, 0.3); }
+        .grade-circle.F { color: var(--danger-color); border: 4px solid var(--danger-color); box-shadow: 0 0 30px rgba(239, 68, 68, 0.3); }
+
+        .grade-circle span {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-top: -10px;
+        }
+
+        .score-details h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .score-details p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .metric {
+            background: rgba(0,0,0,0.2);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Lists */
+        .report-section {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 24px;
+        }
+
+        .report-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .check-list li {
+            padding: 16px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.2);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .dev-fixes li {
+            background: #0f172a;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 16px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #e2e8f0;
+        }
+
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="prabal.html" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-links">
+                <a href="prabal.html">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="analyzer-container">
+        <div class="header-section">
+            <h1 class="highlight">Password UX Analyzer</h1>
+            <p>Paste any URL below. We'll statically audit its password fields for destructive UX patterns (like paste-blocking), autofill compatibility, and security strength feedback.</p>
+        </div>
+
+        <div class="input-card">
+            <form class="search-form" id="audit-form">
+                <input type="url" id="url-input" placeholder="https://example.com/login" required>
+                <button type="submit" class="btn btn-primary" id="audit-btn">
+                    <span>Run Audit</span>
+                    <div class="loader" id="audit-loader"></div>
+                </button>
+            </form>
+        </div>
+
+        <!-- Results Dashboard -->
+        <div id="results-dashboard">
+            <div class="score-card">
+                <div class="grade-circle" id="grade-display">
+                    A
+                    <span>Score: 100</span>
+                </div>
+                <div class="score-details">
+                    <h2 id="target-title">Analysis Complete</h2>
+                    <p id="target-url-display" style="word-break: break-all;">https://example.com</p>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric">
+                            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Fields Analyzed</div>
+                            <div style="font-size: 24px; font-weight: 600;" id="fields-count">0</div>
+                        </div>
+                        <div class="metric">
+                            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Violations Found</div>
+                            <div style="font-size: 24px; font-weight: 600; color: var(--danger-color);" id="violations-count">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-section" id="passed-section" style="border-left: 4px solid var(--success-color);">
+                <h3>✅ Passed Checks</h3>
+                <ul class="check-list" id="passed-list">
+                    <!-- Injected -->
+                </ul>
+            </div>
+
+            <div class="report-section" id="failed-section" style="border-left: 4px solid var(--danger-color);">
+                <h3>❌ Failed Checks & Warnings</h3>
+                <ul class="check-list" id="failed-list" style="color: #fca5a5;">
+                    <!-- Injected -->
+                </ul>
+            </div>
+
+            <div class="report-section" id="fixes-section" style="border-left: 4px solid #3b82f6;">
+                <h3>🛠️ Developer Fix Report</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Implement these changes to your codebase to achieve an A+ UX rating.</p>
+                <ul class="check-list dev-fixes" id="fixes-list">
+                    <!-- Injected -->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="ux_analyzer.js"></script>
+</body>
+</html>

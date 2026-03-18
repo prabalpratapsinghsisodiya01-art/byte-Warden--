@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byte Warden | Log In</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Main Login Card -->
+        <div class="login-card">
+            <!-- Header section inside card -->
+            <div class="card-header">
+                <a href="prabal.html" class="brand">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </a>
+                <h1>Log in to Byte Warden</h1>
+                <p>Access your secure password vault</p>
+                <div style="margin-top: 10px;">
+                    <a href="prabal.html" style="color: var(--accent-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500;">← Back to Home</a>
+                </div>
+            </div>
+
+            <!-- Third party / SSO section -->
+            <div class="social-login-grid">
+                <button class="social-btn" id="btn-gmail">
+                    <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Continue with Google
+                </button>
+                <button class="social-btn" id="btn-microsoft">
+                    <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#f35325" d="M1 1h10.5v10.5H1z"/><path fill="#81bc06" d="M12.5 1H23v10.5H12.5z"/><path fill="#05a6f0" d="M1 12.5h10.5V23H1z"/><path fill="#ffba08" d="M12.5 12.5H23V23H12.5z"/>
+                    </svg>
+                    Continue with Microsoft
+                </button>
+                <button class="social-btn" id="btn-instagram">
+                    <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M9 2H15C18.866 2 22 5.13401 22 9V15C22 18.866 18.866 22 15 22H9C5.13401 22 2 18.866 2 15V9C2 5.13401 5.13401 2 9 2Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                    </svg>
+                    Continue with Instagram
+                </button>
+            </div>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <!-- Standard Auth + Mobile login -->
+            <form class="auth-form" id="login-form">
+                <!-- Toggle between Email and Mobile -->
+                <div class="auth-tabs">
+                     <div class="auth-tab active" data-target="email-auth">Email Address</div>
+                     <div class="auth-tab" data-target="mobile-auth">Mobile Number</div>
+                </div>
+
+                <div id="email-auth" class="auth-section active">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="name@example.com">
+                    </div>
+                </div>
+
+                <div id="mobile-auth" class="auth-section">
+                    <div class="input-group">
+                        <label for="mobile">Mobile Number</label>
+                        <div class="mobile-input-wrapper">
+                             <select id="country-code" class="country-code-select">
+                                <option value="+1">+1 (US)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+91" selected>+91 (IN)</option>
+                                <option value="+61">+61 (AU)</option>
+                             </select>
+                             <input type="tel" id="mobile" placeholder="000 000 0000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="label-with-link">
+                         <label for="password">Password</label>
+                         <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+
+                <div id="login-error" class="error-msg"></div>
+
+                <button type="submit" class="btn btn-primary full-width" id="submit-login">
+                    Log In Attempt
+                </button>
+            </form>
+
+            <div class="card-footer">
+                <p>New to Byte Warden? <a href="#">Create an account</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="login.js"></script>
+</body>
+</html>

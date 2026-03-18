@@ -1,0 +1,306 @@
+/* Login Specific CSS - Byte Warden Theme */
+:root {
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-blue-hover: #2563eb;
+    --border-color: #334155;
+    --danger-red: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+}
+
+.login-card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brand {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.brand:hover {
+    transform: scale(1.05);
+}
+
+.card-header h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.card-header p {
+    color: var(--text-muted);
+}
+
+/* Third-Party Logins */
+.social-login-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-muted);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.divider span {
+    padding: 0 1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Auth Tabs */
+.auth-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-tab {
+    padding-bottom: 0.5rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.auth-tab:hover {
+    color: var(--text-main);
+}
+
+.auth-tab.active {
+    color: var(--text-main);
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-blue);
+}
+
+.auth-section {
+    display: none;
+}
+
+.auth-section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Form Styles */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.label-with-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.label-with-link label {
+    margin-bottom: 0;
+}
+
+.forgot-link {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+/* Mobile Input Specific */
+.mobile-input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.country-code-select {
+    padding: 0.75rem;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-blue-hover);
+    transform: translateY(-1px);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.error-msg {
+    color: var(--danger-red);
+    font-size: 0.85rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    min-height: 1.2rem;
+}
+
+/* Footer */
+.card-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.card-footer a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.card-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1rem;
+    }
+    
+    .login-card {
+        padding: 1.5rem;
+    }
+}

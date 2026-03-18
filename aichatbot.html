@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byte Warden - AI Chatbot</title>
+    <link rel="stylesheet" href="aichatbot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="prabal.html" class="back-link">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Home
+    </a>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Byte Warden Assistant</h2>
+            <p>Your AI Password Security Expert</p>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="quick-actions" id="quick-actions">
+            <button class="chip" data-query="Generate a strong password">Generate Password</button>
+            <button class="chip" data-query="Generate a passphrase">Generate Passphrase</button>
+            <button class="chip" data-query="Analyze password: ">Analyze Password</button>
+            <button class="chip" data-query="Password best practices">Best Practices</button>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Ask about passwords or request a strong password..." autocomplete="off">
+            <button id="send-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script src="aichatbot.js"></script>
+</body>
+</html>

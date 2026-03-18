@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byte Warden | Open Source Password Manager</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="prabal.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-links">
+                <a href="#" id="search-trigger">Search</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#enterprise">Enterprise</a>
+            </div>
+            <div class="nav-auth" id="auth-buttons">
+                <a href="login.html" class="login">Log In</a>
+                <a href="login.html" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="nav-profile" id="user-profile" style="display: none;">
+                <a href="passwordvault.html" class="vault-btn">Go to Vault</a>
+                <div class="profile-avatar">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1>Secure your digital life with <span class="highlight">Byte Warden</span></h1>
+                    <p>The open-source password manager trusted by millions of individuals and businesses worldwide. Generate, store, and autofill your passwords across all your devices.</p>
+                    <div class="hero-actions">
+                        <div class="input-group">
+                            <input type="email" placeholder="Enter your email address" id="hero-email">
+                            <button class="btn btn-primary lg" id="hero-submit">Create Account</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium graphical element (CSS representation of vault) -->
+                <div class="hero-graphic">
+                    <div class="vault-card">
+                        <div class="vault-header">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="vault-body">
+                            <div class="login-item">
+                                <div class="icon google">G</div>
+                                <div class="details">
+                                    <div class="title">Google Account</div>
+                                    <div class="dots">••••••••••••••</div>
+                                </div>
+                                <div class="action-btn">Copy</div>
+                            </div>
+                            <div class="login-item">
+                                <div class="icon github">
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                </div>
+                                <div class="details">
+                                    <div class="title">GitHub</div>
+                                    <div class="dots">•••••••••••••••••</div>
+                                </div>
+                                <div class="action-btn">Copy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h1 class="highlight">THE MOST TRUSTED PASSWORD MANAGER <br> </h1>
+                    <br>
+                    <p>Defend against hackers and data breaches
+                    Fix at-risk passwords and stay safe online with Bitwarden, the best password manager for securely managing and sharing sensitive information.</p>
+                    <br>        
+                    
+                    <div style="width: 90%; max-width: 1200px; margin:1px auto; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
+                        <img src="cyber_security_hero.png" alt="Advanced Cyber Security and Encryption" style="width: 100%; height: auto; display: block; filter: brightness(0.9) contrast(1.1);">
+                    </div>
+
+                    <h2>Enterprise-grade security for everyone.</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="f-icon">🔒</div>
+                        <h3>End-to-End Encryption</h3>
+                        <p>Zero-knowledge architecture ensures that only you have access to your vault data. We can't see it, nor can anyone else.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="f-icon">🌍</div>
+                        <h3>Cross-Platform</h3>
+                        <p>Access Byte Warden from your desktop, browser, or mobile device. Seamless syncing across all your devices.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="f-icon">⚡</div>
+                        <h3>Auto-Fill Magic</h3>
+                        <p>Log into websites and apps in a fraction of a second. Save time and boost your security simultaneously.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Content Area (Integrations/Links) -->
+        <section class="integrations">
+            <div class="container">
+                <div class="integration-box">
+                    <div class="integration-content">
+                        <h2>Extend your Byte Warden experience</h2>
+                        <p>Link your custom tools, generators, or other web pages directly into your vault.</p>
+                        <div class="custom-links">
+                            <!-- User can link other HTML pages here -->
+                              <a href="password_strength.html" target="_blank" class="integration-card">
+                                <div class="i-icon">📈</div>
+                                <div>
+                                    <h4>Password Strength Analyzer</h4>
+                                    <p>Advanced entropy generator tools.</p>
+                                </div>
+                            </a>
+                            <a href="passphrase_generator.html" target="_blank" class="integration-card" style="border-color: rgba(139, 92, 246, 0.5);">
+                                <div class="i-icon" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05)); border-color: rgba(139, 92, 246, 0.2);">🧠</div>
+                                <div>
+                                    <h4>Passphrase & Memory Aid</h4>
+                                    <p>Generate highly-secure diceware passphrases tied to vivid memory palaces.</p>
+                                </div>
+                            </a>
+                            <a href="ux_analyzer.html" target="_blank" class="integration-card" style="border-color: rgba(59, 130, 246, 0.5);">
+                                <div class="i-icon" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05)); border-color: rgba(59, 130, 246, 0.2);">🧑‍💻</div>
+                                <div>
+                                    <h4>Password UX Analyzer</h4>
+                                    <p>Audit any page's password fields for developer best practices.</p>
+                                </div>
+                            </a>
+                            <a href="aichatbot.html" target="_blank" class="integration-card">
+                                <div class="i-icon">🤖</div>
+                                <div>
+                                    <h4>AI Assistant</h4>
+                                    <p>Manage your encryption with ai chatbot .</p>
+                                </div>
+                            </a>
+                            <a href="passwordvault.html" target="_blank" class="integration-card">
+                                <div class="i-icon">🔐</div>
+                                <div>
+                                    <h4>Password Vault</h4>
+                                    <p>Secure and save your password with master password encryption.</p>
+                                </div>
+                            </a>
+                            <a href="deepfake.html" target="_blank" class="integration-card">
+                                <div class="i-icon">🕵️</div>
+                                <div>
+                                    <h4>Deepfake Detection</h4>
+                                    <p>Analyze images and videos for AI manipulation.</p>
+                                </div>
+                            </a>
+                            <a href="breach_check.html" target="_blank" class="integration-card">
+                                <div class="i-icon">🚨</div>
+                                <div>
+                                    <h4>Data Breach Checker</h4>
+                                    <p>Check if your email has been compromised in any known data breaches.</p>
+                                </div>
+                            </a>
+                            <a href="digital-footprint/frontend/index.html" target="_blank" class="integration-card" style="border-color: rgba(16, 185, 129, 0.5);">
+                                <div class="i-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05)); border-color: rgba(16, 185, 129, 0.2);">🛡️</div>
+                                <div>
+                                    <h4>Digital Footprint Protection</h4>
+                                    <p>Secure system to detect footprint exposure and mitigate digital leaks.</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Details Section -->
+        <section class="project-details" id="about">
+            <div class="container project-details-container">
+                <div class="project-text">
+                    <h2 class="highlight">Uncompromising Security Architecture</h2>
+                    <p>Byte Warden isn't just another password manager. Built from the ground up prioritizing a zero-knowledge architecture, your master password never leaves your device. All encryption and decryption is handled locally.</p>
+                    <ul class="detail-list">
+                        <li><strong>Military-Grade Encryption:</strong> PBKDF2 SHA-256 for key derivation and AES-256 bit encryption for your vault data.</li>
+                        <li><strong>Open Source Transparency:</strong> Verifiable code means security flaws cannot hide in obscurity.</li>
+                        <li><strong>Cross-Platform Sync:</strong> Seamlessly securely syncs across all your devices using encrypted blobs.</li>
+                    </ul>
+                </div>
+                <div class="project-image">
+                    <img src="secure-vault.png" alt="Byte Warden Secure Vault Illustration" class="floating-image">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Trusted by security experts everywhere</h2>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"Switching to Byte Warden was the best security decision our team made this year. The zero-knowledge architecture gave our infosec team complete peace of mind."</p>
+                        <div class="author">
+                            <div class="avatar">SJ</div>
+                            <div>
+                                <div class="name">Sarah Jenkins</div>
+                                <div class="role">CISO at TechCorp</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"I love how seamless the autofill is across my Mac, iPhone, and Windows PC at work. It just works exactly how you expect a premium product to."</p>
+                        <div class="author">
+                            <div class="avatar">MD</div>
+                            <div>
+                                <div class="name">Marcus Davis</div>
+                                <div class="role">Software Engineer</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"As an advocate for open-source software, finding a password manager that is both fully transparent and delightfully easy to use was a godsend."</p>
+                        <div class="author">
+                            <div class="avatar">EL</div>
+                            <div>
+                                <div class="name">Elena Lin</div>
+                                <div class="role">Privacy Advocate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Transparent pricing, no surprises</h2>
+                    <p>Start for free, upgrade when you need more power.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="plan-name">Free</div>
+                        <div class="price">$0<span>/forever</span></div>
+                        <ul class="features-list">
+                            <li>Unlimited passwords</li>
+                            <li>Unlimited devices</li>
+                            <li>Core security features</li>
+                            <li>Password generator</li>
+                        </ul>
+                        <button class="btn btn-outline full-width">Get Started Free</button>
+                    </div>
+                    <div class="pricing-card premium">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="plan-name">Premium</div>
+                        <div class="price">$3<span>/month</span></div>
+                        <ul class="features-list">
+                            <li><strong>Everything in Free</strong></li>
+                            <li>Advanced 2FA (YubiKey, FIDO)</li>
+                            <li>Emergency Access</li>
+                            <li>Priority Support</li>
+                            <li>1GB Encrypted Storage</li>
+                        </ul>
+                        <button class="btn btn-primary full-width">Upgrade to Premium</button>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="plan-name">Families</div>
+                        <div class="price">$6<span>/month</span></div>
+                        <ul class="features-list">
+                            <li><strong>Everything in Premium</strong></li>
+                            <li>Up to 6 users</li>
+                            <li>Unlimited shared folders</li>
+                            <li>Family management console</li>
+                        </ul>
+                        <button class="btn btn-outline full-width">Start Family Plan</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bottom-cta" id="enterprise">
+            <div class="container">
+                <div class="cta-box">
+                    <div class="cta-content">
+                        <h2>Need a solution for your entire company?</h2>
+                        <p>Byte Warden Enterprise brings advanced SSO integrations, directory syncing, and comprehensive audit logs to secure your workforce.</p>
+                        
+                        <div class="enterprise-features" style="text-align: left; background: rgba(0,0,0,0.2); padding: 24px; border-radius: 12px; margin: 24px 0; display: inline-block;">
+                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">
+                                <li><strong>✓ Directory Sync:</strong> Seamless integration with Active Directory, Entra ID, Google Workspace, and Okta.</li>
+                                <li><strong>✓ Single Sign-On (SSO):</strong> Login with SAML 2.0 or OIDC using your existing identity provider.</li>
+                                <li><strong>✓ Advanced Event Logs:</strong> Comprehensive SIEM and Splunk integrations for detailed granular auditing.</li>
+                                <li><strong>✓ Custom Policies:</strong> Enforce 2FA, master password length, and restrict access by IP address or role.</li>
+                            </ul>
+                        </div>
+
+                        <div class="cta-buttons">
+                            <a href="login.html" class="btn btn-primary lg" style="text-decoration: none;">Start Enterprise Trial</a>
+                            <a href="contact.html" class="btn btn-outline lg" style="text-decoration: none;">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="brand">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span>Byte Warden</span>
+                </div>
+                <p>&copy; 2025 Byte Warden Inc.</p>
+            </div>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="security.html">Security</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="prabal.js"></script>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="search-input" placeholder="Search for tools, features, or settings..." autocomplete="off">
+                </div>
+                <button class="search-close" id="search-close">&times;</button>
+            </div>
+            <div class="search-results" id="search-results">
+                <div class="search-empty">
+                    <p>Start typing to search across Byte Warden...</p>
+                    <div class="search-suggestions">
+                        <span>Try:</span>
+                        <a href="#" class="suggestion">Vault</a>
+                        <a href="#" class="suggestion">Deepfake</a>
+                        <a href="#" class="suggestion">Analyzer</a>
+                        <a href="#" class="suggestion">Security</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

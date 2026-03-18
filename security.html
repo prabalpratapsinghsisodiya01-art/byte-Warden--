@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byte Warden | Security First</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="prabal.css">
+    <style>
+        .page-header { text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); }
+        .page-header h1 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 1rem; }
+        .page-content { max-width: 800px; margin: 4rem auto; padding: 0 1rem; color: var(--text-muted); line-height: 1.8; }
+        .security-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .security-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px; }
+        .security-card h3 { color: var(--text-main); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .security-card p { font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="prabal.html" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-auth">
+                <a href="prabal.html" class="login">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-header">
+            <h1>Our Security Architecture</h1>
+            <p>Designed and built with absolute paranoia in mind.</p>
+        </div>
+        <div class="page-content">
+            <p class="intro">Byte Warden uses standard, audited encryption algorithms to protect your data. Everything you save in your vault is encrypted before it ever leaves your device.</p>
+            
+            <div class="security-grid">
+                <div class="security-card">
+                    <h3>🛡️ AES-256 Encryption</h3>
+                    <p>Your vault data is encrypted using AES CBC 256-bit encryption. The U.S. government uses this exact same standard to protect Top Secret information.</p>
+                </div>
+                <div class="security-card">
+                    <h3>🔑 PBKDF2 SHA-256</h3>
+                    <p>We use PBKDF2 SHA-256 to hash your master password and derive an encryption key. The high iteration count makes brute-force attacks computationally unfeasible.</p>
+                </div>
+                <div class="security-card">
+                    <h3>☁️ End-to-End Encryption</h3>
+                    <p>Your data is encrypted locally on your browser. Any data synced remains in ciphertext. Even if our servers are compromised, the attackers get nothing but mathematical noise.</p>
+                </div>
+                <div class="security-card">
+                    <h3>🔍 Open Source Ready</h3>
+                    <p>We believe in "trust through verification." By making elements of our application easily reviewable, security researchers around the world can verify our claims.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="brand">
+                    <span>Byte Warden</span>
+                </div>
+                <p>&copy; 2026 Byte Warden Inc.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Footprint Protection | Byte Warden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../prabal.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+        }
+
+        .main-panel {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .side-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .risk-score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            font-weight: 700;
+            background: conic-gradient(var(--success-color) 100%, #1e293b 0);
+            position: relative;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .risk-score::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            background: #0f172a;
+            border-radius: 50%;
+        }
+
+        .risk-score span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .risk-score.high {
+            background: conic-gradient(var(--danger-color) 85%, #1e293b 0);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+            color: var(--danger-color);
+        }
+
+        .risk-score.medium {
+            background: conic-gradient(var(--warning-color) 50%, #1e293b 0);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+            color: var(--warning-color);
+        }
+
+        .risk-score.low {
+            background: conic-gradient(var(--success-color) 15%, #1e293b 0);
+            color: var(--success-color);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .search-form input {
+            flex: 1;
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .search-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .breach-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .breach-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-left: 4px solid var(--danger-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .breach-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breach-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .breach-title img {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .breach-date {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .breach-data {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .data-badge {
+            background: rgba(239, 68, 68, 0.1);
+            color: #fca5a5;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .password-flow {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .password-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .flow-details {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px dashed var(--primary-color);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .flow-details.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .generated-password {
+            font-family: monospace;
+            font-size: 20px;
+            background: #000;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 12px 0;
+            letter-spacing: 2px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 2px solid #0f172a;
+        }
+
+        .timeline-item.warning::before { background: var(--warning-color); }
+        .timeline-item.danger::before { background: var(--danger-color); }
+        .timeline-item.success::before { background: var(--success-color); }
+
+        .time-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        /* Utilities */
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .status-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-box {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .text-danger { color: var(--danger-color); }
+        .text-success { color: var(--success-color); }
+
+        /* Provider links grid */
+        .provider-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../../prabal.html" class="brand">
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" class="brand-icon">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Byte Warden</span>
+            </a>
+            <div class="nav-links">
+                <span class="highlight">Digital Footprint Protection</span>
+            </div>
+            <div class="nav-auth">
+                <a href="../../passwordvault.html" class="btn btn-outline">Back to Vault</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <h2>Data Breach Monitoring</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Scan the dark web and known data breaches for your credentials.</p>
+
+            <form class="search-form" id="breach-form">
+                <input type="email" id="email-input" placeholder="Enter email to monitor..." required>
+                <button type="submit" class="btn btn-primary" id="search-btn">
+                    <span>Scan Now</span>
+                    <div class="loader" id="search-loader"></div>
+                </button>
+            </form>
+
+            <div class="status-overview">
+                <div class="stat-box">
+                    <div class="stat-value" id="stat-monitored">1</div>
+                    <div style="color: var(--text-muted); font-size: 14px;">Monitored Emails</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value text-danger" id="stat-breaches">0</div>
+                    <div style="color: var(--text-muted); font-size: 14px;">Detected Breaches</div>
+                </div>
+            </div>
+
+            <div id="results-container">
+                <!-- Empty state initially -->
+                <div style="text-align: center; padding: 40px; color: var(--text-muted);" id="empty-state">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🛡️</div>
+                    <p>Enter an email address above (e.g., test@example.com) to simulate a breach check and test the automated password reset flow.</p>
+                </div>
+
+                <div class="breach-list" id="breach-list" style="display: none;">
+                    <!-- Breaches injected here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Panel -->
+        <div class="side-panel">
+            <div class="side-card">
+                <h3 style="margin-bottom: 20px; text-align: center;">Risk Score</h3>
+                <div class="risk-score low" id="risk-score-ui">
+                    <span id="risk-score-value">0</span>
+                </div>
+                <p style="text-align: center; color: var(--text-muted); font-size: 14px;" id="risk-score-text">Your digital footprint is currently secure.</p>
+            </div>
+
+            <div class="side-card">
+                <h3 style="margin-bottom: 20px;">Activity Log</h3>
+                <div class="timeline" id="activity-log">
+                    <div class="timeline-item success">
+                        <div class="time-label">Just now</div>
+                        <div>System initialized securely</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inject JS logic -->
+    <script src="app.js"></script>
+</body>
+</html>
