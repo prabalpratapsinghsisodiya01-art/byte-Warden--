@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'Deepfake Detection', desc: 'Analyze images and videos for AI manipulation', url: 'deepfake.html', type: 'Tool', icon: '🕵️' },
         { title: 'Password Strength Analyzer', desc: 'Check your password entropy and crack time', url: 'password_strength.html', type: 'Tool', icon: '📈' },
         { title: 'AI Assistant', desc: 'Chat with our AI about security best practices', url: 'aichatbot.html', type: 'Feature', icon: '🤖' },
-        { title: 'Pricing Plans', desc: 'View Free, Premium, and Family plan options', url: 'prabal.html#pricing', type: 'Page', icon: '💳' },
-        { title: 'Enterprise Solutions', desc: 'Discover SSO and directory syncing for business', url: 'prabal.html#enterprise', type: 'Page', icon: '🏢' },
+        { title: 'Pricing Plans', desc: 'View Free, Premium, and Family plan options', url: 'index.html#pricing', type: 'Page', icon: '💳' },
+        { title: 'Enterprise Solutions', desc: 'Discover SSO and directory syncing for business', url: 'index.html#enterprise', type: 'Page', icon: '🏢' },
         { title: 'Security Architecture', desc: 'Learn about our zero-knowledge encryption', url: 'security.html', type: 'Documentation', icon: '🛡️' },
         { title: 'Privacy Policy', desc: 'Read how we handle and protect your data', url: 'privacy.html', type: 'Legal', icon: '📄' }
     ];

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Simulate network request
         setTimeout(() => {
-            window.location.href = `prabal.html?login_success=true&provider=${encodeURIComponent(provider)}`;
+            window.location.href = `index.html?login_success=true&provider=${encodeURIComponent(provider)}`;
         }, 1000);
     };
 
